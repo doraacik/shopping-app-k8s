@@ -1,0 +1,6 @@
+.env
+
+k8s-app-secret.yaml
+
+/app/node_modules/
+/db-app/node_modules/

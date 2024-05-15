@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: user-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: user-app
+  template:
+    metadata:
+      labels:
+        app: user-app
+    spec:
+      containers:
+      - name: user-app
+        image: user-app:v9
+        ports:
+        - containerPort: 3000
+        env:
+        - name: RABBITMQ_HOST
+          value: rabbitmq

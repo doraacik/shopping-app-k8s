@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: db-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: db-app
+  template:
+    metadata:
+      labels:
+        app: db-app
+    spec:
+      containers:
+      - name: db-app
+        image: db-app:v1
+        ports:
+        - containerPort: 4002
+        env:
+        - name: RABBITMQ_URL
+          value: "amqp://rabbitmq:5672"
+        

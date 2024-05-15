@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mongo-db-server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mongo-db-server
+  template:
+    metadata:
+      labels:
+        app: mongo-db-server
+    spec:
+      containers:
+        - name: mongo-db
+          image: mongo:latest
+          ports:
+            - containerPort: 27017
+          env:
+            - name: MONGO_INITDB_ROOT_USERNAME
+              value: "dora"
+            - name: MONGO_INITDB_ROOT_PASSWORD
+              value: "12345678"
+          volumeMounts:
+            - name: mongo-data
+              mountPath: /data/db
+
+      volumes:
+        - name: mongo-data
+          emptyDir: {}
